@@ -1,0 +1,36 @@
+<a href="#" onclick="do_ajax(Ajax.JSON); return false;">JSON</a><br />
+    <a href="#" onclick="do_ajax(Ajax.RAW); return false;">RAW</a><br />
+    <a href="#" onclick="do_ajax(Ajax.FBML); return false;">FBML</a><br />
+    <label><input type="checkbox" id="requirelogin" checked="checked" /><span>Require Login?</span></label><br />
+    <div><span id="ajax1"></span><span id="ajax2"></span></div>
+
+    <script><!--
+    function do_ajax(type) {
+      var ajax = new Ajax();
+      ajax.responseType = type;
+      switch (type) {
+        case Ajax.JSON:
+          ajax.ondone = function(data) {
+            document.getElementById('ajax1').setTextValue(data.message + ' The current time is: ' +  data.time + '. ');
+            document.getElementById('ajax2').setInnerFBML(data.fbml_test);
+          }
+          break;
+
+        case Ajax.FBML:
+          ajax.ondone = function(data) {
+            document.getElementById('ajax1').setInnerFBML(data);
+            document.getElementById('ajax2').setTextValue('');
+          }
+          break;
+
+        case Ajax.RAW:
+          ajax.ondone = function(data) {
+            document.getElementById('ajax1').setTextValue(data);
+            document.getElementById('ajax2').setTextValue('');
+          }
+          break;
+      }
+      ajax.requireLogin = document.getElementById('requirelogin').getChecked();
+      ajax.post('YOUR_APP_URL_TO_RECEIVE_THE_POST/?t='+type);
+    }
+    //--></script>
