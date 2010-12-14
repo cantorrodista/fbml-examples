@@ -1,0 +1,32 @@
+<fb:serverfbml style="width:100%;">
+<script type="text/fbml">
+
+  <fb:fbml>
+
+<fb:js-string var="example">
+            <fb:request-form var="invite"
+                method="POST" 
+                action="YOUR ACTION HERE" 
+                invite="true"
+                type="Wadus"
+                
+                content="Invita a tus amigos al wadus
+                        <fb:req-choice url='http://apps.facebook.com/<%=Facebooker.current_adapter.facebooker_config['canvas_page_name']%>'
+                        label='Aceptar'
+                        /> 
+                " > 
+                <fb:multi-friend-selector
+                        showborder="true"
+                        actiontext="Invita a tus amigos al wadus"
+                        exclude_ids=""
+                        rows="4"
+                        cols="2"
+                        import_external_friends="false"
+                /> 
+            </fb:request-form>
+</fb:js-string>
+      
+      <img src="YOUR IMAGE PATH" onclick="var my_dialog = new Dialog(Dialog.DIALOG_POP).showMessage('Share with Friends', example, 'Cancel');" />
+  </fb:fbml>
+</script>
+</fb:serverfbml>
