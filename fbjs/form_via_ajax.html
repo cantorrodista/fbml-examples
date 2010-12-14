@@ -1,0 +1,35 @@
+<form action="http://mywebsite.com/form_submit.php" method="post">
+     <p>
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" />
+     </p>
+     <p>
+          <label for="email">Email:</label>
+          <input type="text" name="email" id="email" />
+     </p>
+     <input type="submit" onclick="return submitAjaxForm();" />
+     <p id="ajaxMessage"></p>
+</form>
+
+<script><!--
+function submitAjaxForm() 
+{ 
+	// declare a new FBJS AJAX object
+	var ajax = new Ajax(); 
+	ajax.responseType = Ajax.FBML;
+ 
+	// define a callback to handle the response from the server
+	ajax.ondone = function(data) 
+	{ 
+		document.getElementById('ajaxMessage').setInnerFBML(data);
+	}
+ 
+	// let the user know we're sending the data	
+	document.getElementById('ajaxMessage').setInnerXHTML("Submitting your information, please wait...");
+ 
+	// collect field values
+	var queryParams = { 'name' : document.getElementById('name').getValue(), 'email' : document.getElementById('email').getValue() };
+	ajax.post('http://mywebsite.com/form_submit.php', queryParams);
+	return false;
+}
+//--></script>
